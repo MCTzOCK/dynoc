@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6ef78d71-51c4-47ca-b069-777b0a1119bd" name="Changes" comment="">
+      <change afterPath="P:/Dynoc/.gitignore" afterDir="false" />
+      <change afterPath="P:/Dynoc/.idea/.gitignore" afterDir="false" />
+      <change afterPath="P:/Dynoc/.idea/misc.xml" afterDir="false" />
+      <change afterPath="P:/Dynoc/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="P:/Dynoc/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="P:/Dynoc/database/pom.xml" afterDir="false" />
+      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/DynocDB.java" afterDir="false" />
+      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/auth/Permissions.java" afterDir="false" />
+      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/auth/User.java" afterDir="false" />
+      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/auth/Users.java" afterDir="false" />
+      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/Command.java" afterDir="false" />
+      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/CommandException.java" afterDir="false" />
+      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/Commands.java" afterDir="false" />
+      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/LoginCommand.java" afterDir="false" />
+      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/StatusCommand.java" afterDir="false" />
+      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/TestCommand.java" afterDir="false" />
+      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/crypto/Crypto.java" afterDir="false" />
+      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/logging/Logger.java" afterDir="false" />
+      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/server/ClientProcess.java" afterDir="false" />
+      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/server/Response.java" afterDir="false" />
+      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/server/Server.java" afterDir="false" />
+      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/server/objects/StringObject.java" afterDir="false" />
+      <change afterPath="P:/Dynoc/pom.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="P:/Dynoc" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 0
+}]]></component>
+  <component name="ProjectId" id="2mssvleBn1SKdDeA12VeUnAyZEv" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JAR Application.database [run].executor": "Run",
+    "Maven.database [org.apache.maven.plugins:maven-assembly-plugin:3.6.0:single].executor": "Run",
+    "Maven.database [org.apache.maven.plugins:maven-jar-plugin:3.2.0:jar].executor": "Run",
+    "Maven.database [org.apache.maven.plugins:maven-jar-plugin:3.3.0:jar].executor": "Run",
+    "Maven.database [package].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Shell Script.Run.executor": "Run",
+    "Shell Script.Unnamed.executor": "Run",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "P:/Dynoc/database/target/DynocDB-jar-with-dependencies.jar",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="JAR Application.database [run]">
+    <configuration name="database [run]" type="JarApplication">
+      <option name="JAR_PATH" value="P:/Dynoc/database/target/DynocDB-jar-with-dependencies.jar" />
+      <option name="WORKING_DIRECTORY" value="P:\Dynoc" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2" />
+    </configuration>
+    <configuration name="database [package]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="cmdOptions" />
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="package" />
+              </list>
+            </option>
+            <option name="multimoduleDir" />
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="P:/Dynoc/database" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="JAR Application.database [run]" />
+      <item itemvalue="Maven.database [package]" />
+    </list>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6ef78d71-51c4-47ca-b069-777b0a1119bd" name="Changes" comment="" />
+      <created>1727876853159</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1727876853159</updated>
+      <workItem from="1727876854337" duration="6635000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
