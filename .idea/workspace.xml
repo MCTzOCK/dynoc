@@ -5,29 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ef78d71-51c4-47ca-b069-777b0a1119bd" name="Changes" comment="">
-      <change afterPath="P:/Dynoc/.gitignore" afterDir="false" />
-      <change afterPath="P:/Dynoc/.idea/.gitignore" afterDir="false" />
-      <change afterPath="P:/Dynoc/.idea/misc.xml" afterDir="false" />
-      <change afterPath="P:/Dynoc/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="P:/Dynoc/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="P:/Dynoc/database/pom.xml" afterDir="false" />
-      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/DynocDB.java" afterDir="false" />
-      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/auth/Permissions.java" afterDir="false" />
-      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/auth/User.java" afterDir="false" />
-      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/auth/Users.java" afterDir="false" />
-      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/Command.java" afterDir="false" />
-      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/CommandException.java" afterDir="false" />
-      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/Commands.java" afterDir="false" />
-      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/LoginCommand.java" afterDir="false" />
-      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/StatusCommand.java" afterDir="false" />
-      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/TestCommand.java" afterDir="false" />
-      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/crypto/Crypto.java" afterDir="false" />
-      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/logging/Logger.java" afterDir="false" />
-      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/server/ClientProcess.java" afterDir="false" />
-      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/server/Response.java" afterDir="false" />
-      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/server/Server.java" afterDir="false" />
-      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/server/objects/StringObject.java" afterDir="false" />
-      <change afterPath="P:/Dynoc/pom.xml" afterDir="false" />
+      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/config/Config.java" afterDir="false" />
+      <change beforePath="P:/Dynoc/.gitignore" beforeDir="false" afterPath="P:/Dynoc/.gitignore" afterDir="false" />
+      <change beforePath="P:/Dynoc/.idea/workspace.xml" beforeDir="false" afterPath="P:/Dynoc/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/DynocDB.java" beforeDir="false" afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/DynocDB.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +46,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Shell Script.Run.executor": "Run",
     "Shell Script.Unnamed.executor": "Run",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "P:/Dynoc/database/target/DynocDB-jar-with-dependencies.jar",
     "node.js.detected.package.eslint": "true",
@@ -137,7 +118,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1727876853159</updated>
-      <workItem from="1727876854337" duration="6635000" />
+      <workItem from="1727876854337" duration="8059000" />
     </task>
     <servers />
   </component>
