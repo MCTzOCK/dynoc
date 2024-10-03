@@ -39,11 +39,69 @@ public class DocumentDatabase extends Database implements Serializable {
         return new ArrayList<>(collections.values());
     }
 
-    public ArrayList<Document> query(Collection col, String key, Object value) {
+    public ArrayList<Document> queryEquals(Collection col, String key, Object value) {
         ArrayList<Document> results = new ArrayList<>();
         for(Document doc : col.getDocuments()) {
             if(doc.data.containsKey(key) && doc.data.get(key).equals(value)) {
                 results.add(doc);
+            }
+        }
+        return results;
+    }
+
+    public ArrayList<Document> queryNotEquals(Collection col, String key, Object value) {
+        ArrayList<Document> results = new ArrayList<>();
+        for(Document doc : col.getDocuments()) {
+            if(doc.data.containsKey(key) && !doc.data.get(key).equals(value)) {
+                results.add(doc);
+            }
+        }
+        return results;
+    }
+
+    public ArrayList<Document> queryContains(Collection col, String key, Object value) {
+        ArrayList<Document> results = new ArrayList<>();
+        for(Document doc : col.getDocuments()) {
+            if(doc.data.containsKey(key) && doc.data.get(key) instanceof String) {
+                if(((String) doc.data.get(key)).contains((String) value)) {
+                    results.add(doc);
+                }
+            }
+        }
+        return results;
+    }
+
+    public ArrayList<Document> queryStartsWith(Collection col, String key, Object value) {
+        ArrayList<Document> results = new ArrayList<>();
+        for(Document doc : col.getDocuments()) {
+            if(doc.data.containsKey(key) && doc.data.get(key) instanceof String) {
+                if(((String) doc.data.get(key)).startsWith((String) value)) {
+                    results.add(doc);
+                }
+            }
+        }
+        return results;
+    }
+
+    public ArrayList<Document> queryEndsWith(Collection col, String key, Object value) {
+        ArrayList<Document> results = new ArrayList<>();
+        for(Document doc : col.getDocuments()) {
+            if(doc.data.containsKey(key) && doc.data.get(key) instanceof String) {
+                if(((String) doc.data.get(key)).endsWith((String) value)) {
+                    results.add(doc);
+                }
+            }
+        }
+        return results;
+    }
+
+    public ArrayList<Document> queryMatches(Collection col, String key, String regex) {
+        ArrayList<Document> results = new ArrayList<>();
+        for(Document doc : col.getDocuments()) {
+            if(doc.data.containsKey(key) && doc.data.get(key) instanceof String) {
+                if(((String) doc.data.get(key)).matches(regex)) {
+                    results.add(doc);
+                }
             }
         }
         return results;
@@ -57,5 +115,15 @@ public class DocumentDatabase extends Database implements Serializable {
         id += col.hashCode();
         id += String.valueOf(Math.random()).substring(2, 6);
         return id;
+    }
+
+    public Document getDocument(String id) {
+        for(Collection col : collections.values()) {
+            Document doc = col.getDocument(id);
+            if(doc != null) {
+                return doc;
+            }
+        }
+        return null;
     }
 }

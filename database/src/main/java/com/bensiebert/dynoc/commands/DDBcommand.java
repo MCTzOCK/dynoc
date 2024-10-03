@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class DDBcommand implements Command {
 
@@ -89,16 +90,25 @@ public class DDBcommand implements Command {
                         String name = entry.getKey();
                         JsonNode node = entry.getValue();
                         try {
-                            Class type = Class.forName(node.get("type").asText());
-                            Object value = mapper.treeToValue(node.get("value"), type);
-                            doc.put(name, value);
+                            if(node.get("type").asText().equals("#relation")) {
+                                String foreignId = node.get("value").asText();
+                                Document foreign = ddb.getDocument(foreignId);
+                                if(foreign == null) {
+                                    return;
+                                }
+                                doc.put(name, "$" + foreign.getID());
+                            } else {
+                                Class type = Class.forName(node.get("type").asText());
+                                Object value = mapper.treeToValue(node.get("value"), type);
+                                doc.put(name, value);
+                            }
                         } catch (ClassNotFoundException | JsonProcessingException e) {
                             throw new RuntimeException(e);
                         }
                     });
                     col.addDocument(doc);
                 } catch (Exception e) {
-                    throw new CommandException("Invalid JSON.");
+                    throw new CommandException("Invalid JSON: " + e.getMessage() + "\n" + json);
                 }
                 return new Response(Response.ResponseType.SUCCESS, "Document added.");
             }
@@ -108,6 +118,10 @@ public class DDBcommand implements Command {
                 }
                 String colName = args[2];
                 String id = args[3];
+                boolean populate = false;
+                if(args.length > 4) {
+                    populate = Boolean.parseBoolean(args[4]);
+                }
                 Collection col = ddb.getCollection(colName);
                 if (col == null) {
                     throw new CommandException("Collection not found.");
@@ -116,7 +130,19 @@ public class DDBcommand implements Command {
                 if (doc == null) {
                     throw new CommandException("Document not found.");
                 }
-                return new Response(Response.ResponseType.SUCCESS, doc.data);
+                HashMap<String, Object> data = new HashMap<>(doc.data);
+                if(populate) {
+                    data.forEach((key, value) -> {
+                        if(value instanceof String && ((String) value).startsWith("$")) {
+                            String foreignId = ((String) value).substring(1);
+                            Document foreign = ddb.getDocument(foreignId);
+                            if(foreign != null) {
+                                data.put(key, foreign.data);
+                            }
+                        }
+                    });
+                }
+                return new Response(Response.ResponseType.SUCCESS, data);
             }
             case "list-docs": {
                 if (!proc.user.hasPermission(Permission.READ)) {
@@ -168,9 +194,18 @@ public class DDBcommand implements Command {
                         }
                         JsonNode node = entry.getValue();
                         try {
-                            Class type = Class.forName(node.get("type").asText());
-                            Object value = mapper.treeToValue(node.get("value"), type);
-                            doc.put(name, value);
+                            if(node.get("type").asText().equals("#relation")) {
+                                String foreignId = node.get("value").asText();
+                                Document foreign = ddb.getDocument(foreignId);
+                                if(foreign == null) {
+                                    return;
+                                }
+                                doc.put(name, "$" + foreign.getID());
+                            } else {
+                                Class type = Class.forName(node.get("type").asText());
+                                Object value = mapper.treeToValue(node.get("value"), type);
+                                doc.put(name, value);
+                            }
                         } catch (ClassNotFoundException | JsonProcessingException e) {
                             throw new RuntimeException(e);
                         }
@@ -182,6 +217,45 @@ public class DDBcommand implements Command {
                 }
                 return new Response(Response.ResponseType.SUCCESS, "Document updated.");
             }
+            case "find": {
+                if (!proc.user.hasPermission(Permission.READ)) {
+                    throw new CommandException("You do not have permission to read from this database.");
+                }
+                try {
+                    String colName = args[2];
+                    String key = args[3];
+                    String operator = args[4];
+                    String value = args[5];
+                    Collection col = ddb.getCollection(colName);
+                    if (col == null) {
+                        throw new CommandException("Collection not found.");
+                    }
+
+                    switch(operator) {
+                        case "eq": {
+                            return new Response(Response.ResponseType.SUCCESS, ddb.queryEquals(col, key, value));
+                        }
+                        case "ne": {
+                            return new Response(Response.ResponseType.SUCCESS, ddb.queryNotEquals(col, key, value));
+                        }
+                        case "contains": {
+                            return new Response(Response.ResponseType.SUCCESS, ddb.queryContains(col, key, value));
+                        }
+                        case "starts": {
+                            return new Response(Response.ResponseType.SUCCESS, ddb.queryStartsWith(col, key, value));
+                        }
+                        case "ends": {
+                            return new Response(Response.ResponseType.SUCCESS, ddb.queryEndsWith(col, key, value));
+                        }
+                        case "matches": {
+                            return new Response(Response.ResponseType.SUCCESS, ddb.queryMatches(col, key, value));
+                        }
+                    }
+                } catch (Exception ex) {
+                    throw new CommandException(ex.getMessage());
+                }
+                return null;
+            }
         }
         return null;
     }
@@ -192,16 +266,19 @@ public class DDBcommand implements Command {
          * Samples:
          * ddb create-col test
          * ddb add-doc test {'key': {'value': 'value', 'type': 'java.lang.String'}}
+         * ddb find test key eq value
+         * ddb find test key contains value
          */
         String r = "Usage: ddb <db>\n";
         r += "\tcreate-col <name>\n";
         r += "\tdelete-col <name>\n";
         r += "\tlist-cols\n";
         r += "\tadd-doc <col> <json>\n";
-        r += "\tget-doc <col> <id>\n";
+        r += "\tget-doc <col> <id> <populate(true|false)>\n";
         r += "\tlist-docs <col>\n";
         r += "\tupdate-doc <col> <id> <json>\n";
         r += "\tdelete-doc <col> <id>\n";
+        r += "\tfind <col> <key> <operator> <value>\n";
         return r;
     }
 

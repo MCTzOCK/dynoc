@@ -13,6 +13,7 @@ import com.bensiebert.dynoc.server.Response;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -75,7 +76,7 @@ public class HttpServer {
 
             for (String line2 : content.toString().split("\n")) {
                 if (line2.contains(":")) {
-                    headers.put(line2.split(":")[0], line2.split(":")[1].trim());
+                    headers.put(line2.split(":")[0], Arrays.stream(line2.split(":")).skip(1).reduce((a, b) -> a + ":" + b).get().trim());
                 }
             }
 
