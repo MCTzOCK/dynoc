@@ -71,6 +71,7 @@ public class HttpServer {
             String verb = content.toString().split(" ")[0];
             String path = content.toString().split(" ")[1];
             String protocol = content.toString().split(" ")[2];
+            Logger.info("HTTP " + verb + " " + path + " " + protocol + " from " + socket.getRemoteSocketAddress().toString());
 
             for (String line2 : content.toString().split("\n")) {
                 if (line2.contains(":")) {
@@ -81,12 +82,19 @@ public class HttpServer {
             if (headers.get("X-Username") == null || headers.get("X-Password") == null) {
                 writer.write(getResponse("401 Unauthorized", new Response(Response.ResponseType.ERROR, "Missing X-Username or X-Password").toString()));
                 writer.flush();
+
+                writer.close();
+                reader.close();
+                socket.close();
                 return;
             }
 
             if (!Users.checkPassword(headers.get("X-Username"), Crypto.hash(headers.get("X-Password")))) {
                 writer.write(getResponse("401 Unauthorized", new Response(Response.ResponseType.ERROR, "Invalid X-Username or X-Password").toString()));
                 writer.flush();
+                writer.close();
+                reader.close();
+                socket.close();
                 return;
             }
 
@@ -96,7 +104,7 @@ public class HttpServer {
                 case "/": {
                     writer.write(getResponse("200 OK", new Response(Response.ResponseType.SUCCESS, "Welcome to DynocDB!").toString()));
                     writer.flush();
-                    return;
+                    break;
                 }
                 case "/exec": {
                     String command = headers.get("X-Command");
@@ -132,14 +140,16 @@ public class HttpServer {
                     writer.write(getResponse(status, res.toString()));
                     writer.flush();
 
-                    return;
+                    break;
                 }
                 default: {
                     writer.write(getResponse("404 Not Found", new Response(Response.ResponseType.ERROR, "Not Found").toString()));
                     writer.flush();
-                    return;
                 }
             }
+            writer.close();
+            reader.close();
+            socket.close();
         } catch (Exception e) {
             Logger.error("Error reading HTTP request: " + e.getMessage());
         } finally {

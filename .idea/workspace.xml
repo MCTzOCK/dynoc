@@ -4,20 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6ef78d71-51c4-47ca-b069-777b0a1119bd" name="Changes" comment="In memory CacheCommand">
-      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/ParsedCommand.java" afterDir="false" />
-      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/server/Connection.java" afterDir="false" />
-      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/server/http/HttpConnection.java" afterDir="false" />
-      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/server/http/HttpServer.java" afterDir="false" />
+    <list default="true" id="6ef78d71-51c4-47ca-b069-777b0a1119bd" name="Changes" comment="HTTP-API and proper argument parsing">
       <change beforePath="P:/Dynoc/.idea/workspace.xml" beforeDir="false" afterPath="P:/Dynoc/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/DynocDB.java" beforeDir="false" afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/DynocDB.java" afterDir="false" />
       <change beforePath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/CacheCommand.java" beforeDir="false" afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/CacheCommand.java" afterDir="false" />
-      <change beforePath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/Command.java" beforeDir="false" afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/Command.java" afterDir="false" />
-      <change beforePath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/LoginCommand.java" beforeDir="false" afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/LoginCommand.java" afterDir="false" />
-      <change beforePath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/StatusCommand.java" beforeDir="false" afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/StatusCommand.java" afterDir="false" />
-      <change beforePath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/TestCommand.java" beforeDir="false" afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/TestCommand.java" afterDir="false" />
-      <change beforePath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/config/Config.java" beforeDir="false" afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/config/Config.java" afterDir="false" />
-      <change beforePath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/server/ClientProcess.java" beforeDir="false" afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/server/ClientProcess.java" afterDir="false" />
+      <change beforePath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/server/http/HttpServer.java" beforeDir="false" afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/server/http/HttpServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,7 +130,7 @@
       <option name="presentableId" value="Default" />
       <updated>1727876853159</updated>
       <workItem from="1727876854337" duration="8915000" />
-      <workItem from="1727942776759" duration="6885000" />
+      <workItem from="1727942776759" duration="9853000" />
     </task>
     <task id="LOCAL-00001" summary="In memory CacheCommand">
       <option name="closed" value="true" />
@@ -150,7 +140,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727944892591</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="HTTP-API and proper argument parsing">
+      <option name="closed" value="true" />
+      <created>1727950675950</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1727950675950</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -158,6 +156,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="In memory CacheCommand" />
-    <option name="LAST_COMMIT_MESSAGE" value="In memory CacheCommand" />
+    <MESSAGE value="HTTP-API and proper argument parsing" />
+    <option name="LAST_COMMIT_MESSAGE" value="HTTP-API and proper argument parsing" />
   </component>
 </project>

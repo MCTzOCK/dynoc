@@ -21,7 +21,7 @@ public class CacheCommand implements Command {
         }
 
         if (args.length < 1) {
-            throw new CommandException("Usage: cache <get|set|remove|has|clear|list> [key] [value] [expiration]");
+            throw new CommandException("Usage: cache <get|set|remove|has|clear|list|get-all> [key] [value] [expiration]");
         }
 
         String subCommand = args[0];
@@ -46,6 +46,11 @@ public class CacheCommand implements Command {
                 } else {
                     return new Response(Response.ResponseType.ERROR, "Key not found in cache.");
                 }
+            case "get-all":
+                if(!proc.user.hasPermission(Permission.READ)) {
+                    throw new CommandException("You do not have permission to read from the cache.");
+                }
+                return new Response(Response.ResponseType.SUCCESS, InMemoryCache.cache);
             case "set":
                 if (args.length < 4) {
                     throw new CommandException("Usage: cache set <key> <value> <expiration>");
