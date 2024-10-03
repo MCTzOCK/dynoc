@@ -9,7 +9,9 @@ import com.bensiebert.dynoc.config.Config;
 import com.bensiebert.dynoc.logging.Logger;
 import com.bensiebert.dynoc.server.Server;
 import com.bensiebert.dynoc.server.http.HttpServer;
+import com.bensiebert.dynoc.storage.DBManager;
 
+import java.io.File;
 import java.io.IOException;
 
 public class DynocDB {
@@ -35,6 +37,15 @@ public class DynocDB {
         }
 
         Commands.registerCommands();
+
+        Logger.info("Loading Databases...");
+
+        File root = new File(Config.props.getOrDefault("db.location", System.getProperty("user.dir") + "/databases").toString());
+
+        DBManager.load(root);
+
+        Logger.info("Loaded " + DBManager.getDatabases().size() + " databases.");
+
         try {
             Server server = new Server(Integer.parseInt(Config.props.getOrDefault("port", 8000).toString()));
             if(Boolean.parseBoolean(Config.props.getOrDefault("http.enabled", true).toString())) {
@@ -58,5 +69,11 @@ public class DynocDB {
         cleanupThread.setDaemon(true);
         cleanupThread.setName("IMC Cleanup Thread");
         cleanupThread.start();
+
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            Logger.info("Shutting down DynocDB...");
+            DBManager.save(root);
+            Logger.info("Saved databases.");
+        }));
     }
 }

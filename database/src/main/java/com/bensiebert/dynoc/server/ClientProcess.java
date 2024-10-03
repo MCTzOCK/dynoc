@@ -27,7 +27,13 @@ public class ClientProcess extends Connection {
                     PrintWriter out = new PrintWriter(client.getOutputStream(), true);
                     String command = "";
 
+                    out.print("Welcome to DynocDB! Type 'help' for a list of commands.\n");
+                    out.print("Type 'exit' to disconnect.\n");
+                    out.flush();
+
                     while (!command.equals("exit")) {
+                        out.print("dynoc> ");
+                        out.flush();
                         command = in.readLine();
                         if (command == null) {
                             continue;
