@@ -4,6 +4,7 @@ import com.bensiebert.dynoc.auth.Permission;
 import com.bensiebert.dynoc.server.Connection;
 import com.bensiebert.dynoc.server.Response;
 import com.bensiebert.dynoc.storage.DBManager;
+import com.bensiebert.dynoc.storage.DocumentDatabase;
 import com.bensiebert.dynoc.storage.KVDatabase;
 
 public class DBCommand implements Command {
@@ -43,7 +44,8 @@ public class DBCommand implements Command {
                     case "relational":
                         throw new CommandException("Relational databases are not supported.");
                     case "document":
-                        throw new CommandException("Document databases are not supported.");
+                        DBManager.addDatabase(new DocumentDatabase(name));
+                        break;
                     case "kv":
                         DBManager.addDatabase(new KVDatabase(name));
                         break;
@@ -57,7 +59,11 @@ public class DBCommand implements Command {
                 if(!proc.user.hasPermission(Permission.READ)) {
                     throw new CommandException("You do not have permission to list databases.");
                 }
-                return new Response(Response.ResponseType.SUCCESS, DBManager.getDatabases());
+                String[] names = new String[DBManager.getDatabases().size()];
+                for(int i = 0; i < DBManager.getDatabases().size(); i++) {
+                    names[i] = DBManager.getDatabases().get(i).name;
+                }
+                return new Response(Response.ResponseType.SUCCESS, names);
             }
             case "delete": {
                 if(args.length < 2) {
