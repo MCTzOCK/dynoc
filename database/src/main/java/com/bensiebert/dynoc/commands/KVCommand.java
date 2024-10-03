@@ -22,7 +22,7 @@ public class KVCommand implements Command {
             throw new CommandException("Invalid number of arguments. Usage: kv-db <db>");
         }
 
-        Database db = DBManager.getDatabase(args[1]);
+        Database db = DBManager.getDatabase(args[0]);
         if(db == null) {
             throw new CommandException("Database not found.");
         }
@@ -32,14 +32,14 @@ public class KVCommand implements Command {
 
         KVDatabase kvdb = (KVDatabase) db;
 
-        String subCommand = args[2];
+        String subCommand = args[1];
 
         switch(subCommand) {
             case "get":
                 if(!proc.user.hasPermission(Permission.READ)) {
                     return new Response(Response.ResponseType.ERROR, "You do not have permission to read from this database.");
                 }
-                String key = args[3];
+                String key = args[2];
                 Object value = kvdb.get(key);
                 if(value == null) {
                     return new Response(Response.ResponseType.ERROR, "Key not found.");
@@ -49,15 +49,15 @@ public class KVCommand implements Command {
                 if(!proc.user.hasPermission(Permission.WRITE)) {
                     return new Response(Response.ResponseType.ERROR, "You do not have permission to write to this database.");
                 }
-                key = args[3];
-                String val = args[4];
+                key = args[2];
+                String val = args[3];
                 kvdb.put(key, val);
                 return new Response(Response.ResponseType.SUCCESS, "Key set.");
             case "del":
                 if(!proc.user.hasPermission(Permission.WRITE)) {
                     return new Response(Response.ResponseType.ERROR, "You do not have permission to write to this database.");
                 }
-                key = args[3];
+                key = args[2];
                 kvdb.remove(key);
                 return new Response(Response.ResponseType.SUCCESS, "Key deleted.");
             case "get-all":
