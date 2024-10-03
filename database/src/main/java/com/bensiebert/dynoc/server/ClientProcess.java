@@ -1,19 +1,22 @@
 package com.bensiebert.dynoc.server;
 
-import com.bensiebert.dynoc.auth.User;
 import com.bensiebert.dynoc.commands.Command;
 import com.bensiebert.dynoc.commands.CommandException;
 import com.bensiebert.dynoc.commands.Commands;
 import com.bensiebert.dynoc.commands.ParsedCommand;
 import com.bensiebert.dynoc.logging.Logger;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.ArrayList;
 
 public class ClientProcess extends Connection {
 
     public Thread clientThread;
+    public BufferedReader in;
+    public PrintWriter out;
 
     public ClientProcess(Socket client) {
         this.client = client;
@@ -23,15 +26,15 @@ public class ClientProcess extends Connection {
             public void run() {
                 super.run();
                 try {
-                    BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-                    PrintWriter out = new PrintWriter(client.getOutputStream(), true);
+                    in = new BufferedReader(new InputStreamReader(client.getInputStream()));
+                    out = new PrintWriter(client.getOutputStream(), true);
                     String command = "";
 
                     out.print("Welcome to DynocDB! Type 'help' for a list of commands.\n");
                     out.print("Type 'exit' to disconnect.\n");
                     out.flush();
 
-                    while (!command.equals("exit")) {
+                    while (client.isConnected()) {
                         out.print("dynoc> ");
                         out.flush();
                         command = in.readLine();
@@ -47,7 +50,10 @@ public class ClientProcess extends Connection {
                         }
 
                         try {
-                            out.println(c.execute(ClientProcess.this, pc.args));
+                            Response o = c.execute(ClientProcess.this, pc.args);
+                            if (o != null) {
+                                out.println(o);
+                            }
                         } catch (CommandException e) {
                             out.println(new Response(Response.ResponseType.ERROR, e.getMessage()));
                         }

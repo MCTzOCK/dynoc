@@ -74,4 +74,18 @@ public class DBCommand implements Command {
                 throw new CommandException("Invalid subcommand.");
         }
     }
+
+    @Override
+    public String getUsage() {
+        String r = "Usage: db\n";
+        r += "\tdb create <name> [relational|document|kv] (Requires CREATE permission)\n";
+        r += "\tdb delete <name> (Requires DELETE permission)\n";
+        r += "\tdb list (Requires READ permission)\n";
+        return r;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Manages databases.";
+    }
 }

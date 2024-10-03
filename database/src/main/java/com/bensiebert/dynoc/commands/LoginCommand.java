@@ -29,4 +29,15 @@ public class LoginCommand implements Command {
         }
         return new Response(Response.ResponseType.ERROR, "Invalid username or password");
     }
+
+    @Override
+    public String getUsage() {
+        String r = "Usage: login <username> <password>";
+        return r;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Log in to the server.";
+    }
 }

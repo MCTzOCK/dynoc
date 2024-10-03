@@ -9,6 +9,7 @@ import com.bensiebert.dynoc.server.Response;
 import java.util.ArrayList;
 
 public class CacheCommand implements Command {
+
     @Override
     public String getCommand() {
         return "cache";
@@ -28,7 +29,7 @@ public class CacheCommand implements Command {
 
         switch (subCommand) {
             case "clear":
-                if(!proc.user.hasPermission(Permission.DELETE)) {
+                if (!proc.user.hasPermission(Permission.DELETE)) {
                     throw new CommandException("You do not have permission to clear the cache.");
                 }
                 InMemoryCache.clear();
@@ -37,7 +38,7 @@ public class CacheCommand implements Command {
                 if (args.length < 2) {
                     throw new CommandException("Usage: cache get <key>");
                 }
-                if(!proc.user.hasPermission(Permission.READ)) {
+                if (!proc.user.hasPermission(Permission.READ)) {
                     throw new CommandException("You do not have permission to read from the cache.");
                 }
                 String key = args[1];
@@ -47,7 +48,7 @@ public class CacheCommand implements Command {
                     return new Response(Response.ResponseType.ERROR, "Key not found in cache.");
                 }
             case "get-all":
-                if(!proc.user.hasPermission(Permission.READ)) {
+                if (!proc.user.hasPermission(Permission.READ)) {
                     throw new CommandException("You do not have permission to read from the cache.");
                 }
                 return new Response(Response.ResponseType.SUCCESS, InMemoryCache.cache);
@@ -55,7 +56,7 @@ public class CacheCommand implements Command {
                 if (args.length < 4) {
                     throw new CommandException("Usage: cache set <key> <value> <expiration>");
                 }
-                if(!proc.user.hasPermission(Permission.WRITE)) {
+                if (!proc.user.hasPermission(Permission.WRITE)) {
                     throw new CommandException("You do not have permission to write to the cache.");
                 }
                 String setKey = args[1];
@@ -63,7 +64,7 @@ public class CacheCommand implements Command {
                 System.arraycopy(args, 2, value, 0, args.length - 3);
                 String setValue = String.join(" ", value);
                 long expiration = Long.parseLong(args[args.length - 1]);
-                if(expiration != -1L) {
+                if (expiration != -1L) {
                     expiration = System.currentTimeMillis() + expiration;
                 }
                 InMemoryCache.put(setKey, setValue, expiration);
@@ -72,7 +73,7 @@ public class CacheCommand implements Command {
                 if (args.length < 2) {
                     throw new CommandException("Usage: cache remove <key>");
                 }
-                if(!proc.user.hasPermission(Permission.DELETE)) {
+                if (!proc.user.hasPermission(Permission.DELETE)) {
                     throw new CommandException("You do not have permission to remove from the cache.");
                 }
                 String removeKey = args[1];
@@ -82,7 +83,7 @@ public class CacheCommand implements Command {
                 if (args.length < 2) {
                     throw new CommandException("Usage: cache has <key>");
                 }
-                if(!proc.user.hasPermission(Permission.READ)) {
+                if (!proc.user.hasPermission(Permission.READ)) {
                     throw new CommandException("You do not have permission to read from the cache.");
                 }
                 String hasKey = args[1];
@@ -92,7 +93,7 @@ public class CacheCommand implements Command {
                     return new Response(Response.ResponseType.ERROR, "Key not found in cache.");
                 }
             case "list":
-                if(!proc.user.hasPermission(Permission.READ)) {
+                if (!proc.user.hasPermission(Permission.READ)) {
                     throw new CommandException("You do not have permission to read from the cache.");
                 }
                 ArrayList<String> keys = new ArrayList<>(InMemoryCache.cache.keySet());
@@ -100,5 +101,24 @@ public class CacheCommand implements Command {
         }
 
         return new Response(Response.ResponseType.ERROR, "Invalid subcommand.");
+    }
+
+    @Override
+    public String getUsage() {
+        String r = "Usage: cache\n";
+        r += "\tget <key> - Get a value from the cache. (Requires READ permission)\n";
+        r += "\tget-all - Get all values from the cache. (Requires READ permission)\n";
+        r += "\tset <key> <value> <expiration> - Set a value in the cache. (Requires WRITE permission)\n";
+        r += "\t\tNote: expiration is in milliseconds. Use -1 for no expiration.\n";
+        r += "\tremove <key> - Remove a value from the cache. (Requires DELETE permission)\n";
+        r += "\thas <key> - Check if a key exists in the cache. (Requires READ permission)\n";
+        r += "\tclear - Clear the cache. (Requires DELETE permission)\n";
+        r += "\tlist - List all keys in the cache. (Requires READ permission)\n";
+        return r;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Manages the In-Memory Cache.";
     }
 }

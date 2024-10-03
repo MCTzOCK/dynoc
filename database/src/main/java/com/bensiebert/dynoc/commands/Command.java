@@ -9,4 +9,8 @@ public interface Command {
     public String getCommand();
 
     public Response execute(Connection proc, String[] args) throws CommandException;
+
+    public String getUsage();
+
+    public String getDescription();
 }

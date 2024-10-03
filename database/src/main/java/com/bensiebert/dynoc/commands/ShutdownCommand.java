@@ -22,4 +22,14 @@ public class ShutdownCommand implements Command {
         System.exit(0);
         return null;
     }
+
+    @Override
+    public String getUsage() {
+        return "Usage: shutdown (Requires ALL permission)";
+    }
+
+    @Override
+    public String getDescription() {
+        return "Shuts down Dynoc.";
+    }
 }

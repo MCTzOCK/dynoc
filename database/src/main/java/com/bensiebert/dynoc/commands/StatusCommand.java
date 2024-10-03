@@ -5,6 +5,7 @@ import com.bensiebert.dynoc.server.Connection;
 import com.bensiebert.dynoc.server.Response;
 
 public class StatusCommand implements Command {
+
     @Override
     public String getCommand() {
         return "status";
@@ -21,5 +22,15 @@ public class StatusCommand implements Command {
         }
 
         return new Response(Response.ResponseType.SUCCESS, "Logged in as " + proc.user.name, proc.user);
+    }
+
+    @Override
+    public String getUsage() {
+        return "Usage: status";
+    }
+
+    @Override
+    public String getDescription() {
+        return "Get the current status of your session.";
     }
 }
