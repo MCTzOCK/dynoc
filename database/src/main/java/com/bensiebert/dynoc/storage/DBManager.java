@@ -1,5 +1,7 @@
 package com.bensiebert.dynoc.storage;
 
+import com.bensiebert.dynoc.logging.Logger;
+
 import java.io.File;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -37,6 +39,7 @@ public class DBManager {
     }
 
     public static void save(File location) {
+        Logger.debug("Saving databases to " + location.getAbsolutePath());
         if(!location.exists()) {
             location.mkdirs();
         }

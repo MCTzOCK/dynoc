@@ -70,6 +70,20 @@ public class DynocDB {
         cleanupThread.setName("IMC Cleanup Thread");
         cleanupThread.start();
 
+        Thread saveThread = new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(1000 * 60 * 10); // Save every ten minutes automatically
+                } catch (InterruptedException e) {
+                    Logger.error("Error in save thread: " + e.getMessage());
+                }
+                DBManager.save(root);
+            }
+        });
+        saveThread.setDaemon(true);
+        saveThread.setName("DB Save Thread");
+        saveThread.start();
+
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             Logger.info("Shutting down DynocDB...");
             DBManager.save(root);

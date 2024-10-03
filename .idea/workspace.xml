@@ -5,16 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ef78d71-51c4-47ca-b069-777b0a1119bd" name="Changes" comment="Basic DB Manager">
-      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/ExitCommand.java" afterDir="false" />
+      <change afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/KVCommand.java" afterDir="false" />
+      <change beforePath="P:/Dynoc/.gitignore" beforeDir="false" afterPath="P:/Dynoc/.gitignore" afterDir="false" />
       <change beforePath="P:/Dynoc/.idea/workspace.xml" beforeDir="false" afterPath="P:/Dynoc/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/CacheCommand.java" beforeDir="false" afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/CacheCommand.java" afterDir="false" />
-      <change beforePath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/Command.java" beforeDir="false" afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/Command.java" afterDir="false" />
-      <change beforePath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/DBCommand.java" beforeDir="false" afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/DBCommand.java" afterDir="false" />
-      <change beforePath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/LoginCommand.java" beforeDir="false" afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/LoginCommand.java" afterDir="false" />
-      <change beforePath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/ShutdownCommand.java" beforeDir="false" afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/ShutdownCommand.java" afterDir="false" />
-      <change beforePath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/StatusCommand.java" beforeDir="false" afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/StatusCommand.java" afterDir="false" />
-      <change beforePath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/commands/TestCommand.java" beforeDir="false" />
-      <change beforePath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/server/ClientProcess.java" beforeDir="false" afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/server/ClientProcess.java" afterDir="false" />
+      <change beforePath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/DynocDB.java" beforeDir="false" afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/DynocDB.java" afterDir="false" />
+      <change beforePath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/storage/DBManager.java" beforeDir="false" afterPath="P:/Dynoc/database/src/main/java/com/bensiebert/dynoc/storage/DBManager.java" afterDir="false" />
+      <change beforePath="P:/Dynoc/databases/test.db" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +52,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "JAR Application.database [run].executor": "Debug",
+    "JAR Application.database [run].executor": "Run",
     "Maven.database [org.apache.maven.plugins:maven-assembly-plugin:3.6.0:single].executor": "Run",
     "Maven.database [org.apache.maven.plugins:maven-jar-plugin:3.2.0:jar].executor": "Run",
     "Maven.database [org.apache.maven.plugins:maven-jar-plugin:3.3.0:jar].executor": "Run",
@@ -78,7 +74,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JAR Application.database [run]">
+  <component name="RunManager" selected="Maven.database [package]">
     <configuration name="database [run]" type="JarApplication">
       <option name="JAR_PATH" value="P:/Dynoc/database/target/DynocDB-jar-with-dependencies.jar" />
       <option name="WORKING_DIRECTORY" value="P:\Dynoc" />
@@ -137,7 +133,7 @@
       <option name="presentableId" value="Default" />
       <updated>1727876853159</updated>
       <workItem from="1727876854337" duration="8915000" />
-      <workItem from="1727942776759" duration="13361000" />
+      <workItem from="1727942776759" duration="14672000" />
     </task>
     <task id="LOCAL-00001" summary="In memory CacheCommand">
       <option name="closed" value="true" />
