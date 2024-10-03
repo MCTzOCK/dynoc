@@ -2,7 +2,6 @@ package com.bensiebert.dynoc.commands;
 
 import com.bensiebert.dynoc.server.ClientProcess;
 import com.bensiebert.dynoc.server.Response;
-import com.bensiebert.dynoc.server.objects.StringObject;
 
 public class StatusCommand implements Command {
     @Override
@@ -20,6 +19,6 @@ public class StatusCommand implements Command {
             throw new CommandException("Not logged in");
         }
 
-        return new Response(Response.ResponseType.SUCCESS, "Logged in as " + proc.user.name, new StringObject(proc.user.name));
+        return new Response(Response.ResponseType.SUCCESS, "Logged in as " + proc.user.name, proc.user);
     }
 }

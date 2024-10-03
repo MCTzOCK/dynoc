@@ -1,6 +1,6 @@
 package com.bensiebert.dynoc.auth;
 
-public enum Permissions {
+public enum Permission {
     READ,
     WRITE,
     DELETE,

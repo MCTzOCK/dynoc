@@ -4,7 +4,6 @@ import com.bensiebert.dynoc.auth.Users;
 import com.bensiebert.dynoc.crypto.Crypto;
 import com.bensiebert.dynoc.server.ClientProcess;
 import com.bensiebert.dynoc.server.Response;
-import com.bensiebert.dynoc.server.objects.StringObject;
 
 public class LoginCommand implements Command {
 
@@ -25,7 +24,7 @@ public class LoginCommand implements Command {
         }
         if(Users.checkPassword(username, hashedPassword)) {
             proc.user = Users.getUser(username);
-            return new Response(Response.ResponseType.SUCCESS, "Logged in as " + username, new StringObject(username));
+            return new Response(Response.ResponseType.SUCCESS, "Logged in as " + username, username);
         }
         return new Response(Response.ResponseType.ERROR, "Invalid username or password");
     }

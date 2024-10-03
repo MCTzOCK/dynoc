@@ -30,6 +30,7 @@ public class Server {
                     try {
                         Socket client = server.accept();
                         ClientProcess proc = new ClientProcess(client);
+                        proc.clientThread.setName("Client Connection " + client.getRemoteSocketAddress().toString() + " Thread");
                         proc.clientThread.start();
                     } catch (IOException e) {
                         Logger.error("Error accepting client: " + e.getMessage());
@@ -37,6 +38,7 @@ public class Server {
                 }
             }
         };
+        serverThread.setName("Server Thread");
 
         serverThread.start();
     }

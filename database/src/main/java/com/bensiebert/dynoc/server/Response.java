@@ -1,17 +1,19 @@
 package com.bensiebert.dynoc.server;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class Response {
 
     public String message;
     public ResponseType type;
-    public SerializableObject data;
+    public Object data;
 
-    public Response(ResponseType type, String message, SerializableObject data) {
+    public Response(ResponseType type, String message, Object data) {
         this.type = type;
         this.data = data;
     }
 
-    public Response(ResponseType type, SerializableObject data) {
+    public Response(ResponseType type, Object data) {
         this.type = type;
         this.data = data;
     }
@@ -27,16 +29,12 @@ public class Response {
 
     @Override
     public String toString() {
-        String res = "";
-        res += "{\"type\": \"" + type + "\",";
-        if(message != null) {
-            res += "\"message\": \"" + message + "\",";
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.writeValueAsString(this);
+        } catch (Exception e) {
+            return "{\"type\": \"error\", \"message\": \"Error serializing response.\"}";
         }
-        if(data != null) {
-            res += "\"data\": \"" + data.serialize() + "\"";
-        }
-        res += "}";
-        return res;
     }
 
     public enum ResponseType {
@@ -46,9 +44,5 @@ public class Response {
         public String toString() {
             return this.name().toLowerCase();
         }
-    }
-
-    public interface SerializableObject {
-        public String serialize();
     }
 }

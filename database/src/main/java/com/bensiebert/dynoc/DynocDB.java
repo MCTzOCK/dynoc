@@ -1,11 +1,11 @@
 package com.bensiebert.dynoc;
 
-import com.bensiebert.dynoc.auth.Permissions;
+import com.bensiebert.dynoc.auth.Permission;
 import com.bensiebert.dynoc.auth.User;
 import com.bensiebert.dynoc.auth.Users;
+import com.bensiebert.dynoc.cache.InMemoryCache;
 import com.bensiebert.dynoc.commands.Commands;
 import com.bensiebert.dynoc.config.Config;
-import com.bensiebert.dynoc.crypto.Crypto;
 import com.bensiebert.dynoc.logging.Logger;
 import com.bensiebert.dynoc.server.Server;
 
@@ -22,9 +22,9 @@ public class DynocDB {
         for (String user : users) {
             String password = Config.props.getOrDefault("users." + user + ".password", "").toString();
             String[] permNames = Config.props.getOrDefault("users." + user + ".permissions", "").toString().split(",");
-            Permissions[] permissions = new Permissions[permNames.length];
+            Permission[] permissions = new Permission[permNames.length];
             for (int i = 0; i < permNames.length; i++) {
-                permissions[i] = Permissions.valueOf(permNames[i]);
+                permissions[i] = Permission.valueOf(permNames[i]);
             }
             Users.addUser(new User(
                     user,
@@ -40,5 +40,19 @@ public class DynocDB {
             Logger.error("Error starting server: " + e.getMessage());
             System.exit(1);
         }
+
+        Thread cleanupThread = new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    Logger.error("Error in cleanup thread: " + e.getMessage());
+                }
+                InMemoryCache.cleanup();
+            }
+        });
+        cleanupThread.setDaemon(true);
+        cleanupThread.setName("IMC Cleanup Thread");
+        cleanupThread.start();
     }
 }
