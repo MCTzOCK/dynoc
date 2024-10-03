@@ -102,6 +102,86 @@ public class DDBcommand implements Command {
                 }
                 return new Response(Response.ResponseType.SUCCESS, "Document added.");
             }
+            case "get-doc": {
+                if (!proc.user.hasPermission(Permission.READ)) {
+                    throw new CommandException("You do not have permission to read from this database.");
+                }
+                String colName = args[2];
+                String id = args[3];
+                Collection col = ddb.getCollection(colName);
+                if (col == null) {
+                    throw new CommandException("Collection not found.");
+                }
+                Document doc = col.getDocument(id);
+                if (doc == null) {
+                    throw new CommandException("Document not found.");
+                }
+                return new Response(Response.ResponseType.SUCCESS, doc.data);
+            }
+            case "list-docs": {
+                if (!proc.user.hasPermission(Permission.READ)) {
+                    throw new CommandException("You do not have permission to read from this database.");
+                }
+                String colName = args[2];
+                Collection col = ddb.getCollection(colName);
+                if (col == null) {
+                    throw new CommandException("Collection not found.");
+                }
+                return new Response(Response.ResponseType.SUCCESS, col.getDocuments());
+            }
+            case "delete-doc": {
+                if (!proc.user.hasPermission(Permission.DELETE)) {
+                    throw new CommandException("You do not have permission to delete from this database.");
+                }
+                String colName = args[2];
+                String id = args[3];
+                Collection col = ddb.getCollection(colName);
+                if (col == null) {
+                    throw new CommandException("Collection not found.");
+                }
+                col.removeDocument(id);
+                return new Response(Response.ResponseType.SUCCESS, "Document deleted.");
+            }
+            case "update-doc": {
+                if (!proc.user.hasPermission(Permission.WRITE)) {
+                    throw new CommandException("You do not have permission to write to this database.");
+                }
+                String colName = args[2];
+                String id = args[3];
+                Collection col = ddb.getCollection(colName);
+                if (col == null) {
+                    throw new CommandException("Collection not found.");
+                }
+                String json = Arrays.stream(args).skip(4).reduce((a, b) -> a + " " + b).orElse("");
+                json = json.replaceAll("'", "\"");
+                ObjectMapper mapper = new ObjectMapper();
+                try {
+                    JsonNode root = mapper.readTree(json);
+                    Document doc = col.getDocument(id);
+                    if (doc == null) {
+                        throw new CommandException("Document not found.");
+                    }
+                    root.fields().forEachRemaining(entry -> {
+                        String name = entry.getKey();
+                        if(name.startsWith("#")) {
+                            return;
+                        }
+                        JsonNode node = entry.getValue();
+                        try {
+                            Class type = Class.forName(node.get("type").asText());
+                            Object value = mapper.treeToValue(node.get("value"), type);
+                            doc.put(name, value);
+                        } catch (ClassNotFoundException | JsonProcessingException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+                    doc.put("#updated", System.currentTimeMillis());
+                    doc.put("#version", (Integer) doc.data.get("#version") + 1);
+                } catch (Exception e) {
+                    throw new CommandException("Invalid JSON.");
+                }
+                return new Response(Response.ResponseType.SUCCESS, "Document updated.");
+            }
         }
         return null;
     }
