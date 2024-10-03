@@ -20,6 +20,8 @@ public class Config {
                 Logger.info("Default credentials: admin:password");
                 fw = new FileWriter(f);
                 fw.write("port=8000\n");
+                fw.write("http.enabled=true\n");
+                fw.write("http.port=8001\n");
                 fw.write("users=admin\n");
                 fw.write("users.admin.password=5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8\n");
                 fw.write("users.admin.permissions=ALL\n");

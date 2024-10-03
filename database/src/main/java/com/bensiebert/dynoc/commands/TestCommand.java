@@ -2,6 +2,7 @@ package com.bensiebert.dynoc.commands;
 
 import com.bensiebert.dynoc.logging.Logger;
 import com.bensiebert.dynoc.server.ClientProcess;
+import com.bensiebert.dynoc.server.Connection;
 import com.bensiebert.dynoc.server.Response;
 
 public class TestCommand implements Command {
@@ -12,7 +13,7 @@ public class TestCommand implements Command {
     }
 
     @Override
-    public Response execute(ClientProcess proc, String[] args) throws CommandException {
+    public Response execute(Connection proc, String[] args) throws CommandException {
         if (args.length != 0) {
             String ar = "";
             for (String arg : args) {

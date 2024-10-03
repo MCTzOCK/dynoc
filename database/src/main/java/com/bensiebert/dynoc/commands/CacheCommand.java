@@ -3,6 +3,7 @@ package com.bensiebert.dynoc.commands;
 import com.bensiebert.dynoc.auth.Permission;
 import com.bensiebert.dynoc.cache.InMemoryCache;
 import com.bensiebert.dynoc.server.ClientProcess;
+import com.bensiebert.dynoc.server.Connection;
 import com.bensiebert.dynoc.server.Response;
 
 import java.util.ArrayList;
@@ -14,13 +15,13 @@ public class CacheCommand implements Command {
     }
 
     @Override
-    public Response execute(ClientProcess proc, String[] args) throws CommandException {
+    public Response execute(Connection proc, String[] args) throws CommandException {
         if (proc.user == null) {
             throw new CommandException("You must be logged in to use this command.");
         }
 
         if (args.length < 1) {
-            throw new CommandException("Usage: cache <get|set|remove|has|clear> [key] [value] [expiration]");
+            throw new CommandException("Usage: cache <get|set|remove|has|clear|list> [key] [value] [expiration]");
         }
 
         String subCommand = args[0];

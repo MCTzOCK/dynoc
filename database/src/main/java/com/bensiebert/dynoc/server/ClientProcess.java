@@ -4,16 +4,16 @@ import com.bensiebert.dynoc.auth.User;
 import com.bensiebert.dynoc.commands.Command;
 import com.bensiebert.dynoc.commands.CommandException;
 import com.bensiebert.dynoc.commands.Commands;
+import com.bensiebert.dynoc.commands.ParsedCommand;
 import com.bensiebert.dynoc.logging.Logger;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 
-public class ClientProcess {
+public class ClientProcess extends Connection {
 
-    public Socket client;
     public Thread clientThread;
-    public User user;
 
     public ClientProcess(Socket client) {
         this.client = client;
@@ -32,11 +32,8 @@ public class ClientProcess {
                         if (command == null) {
                             continue;
                         }
-                        String cmd = command.split(" ")[0];
-                        String[] arg0 = command.split(" ");
-                        String[] args = new String[arg0.length - 1];
-                        System.arraycopy(arg0, 1, args, 0, arg0.length - 1);
-                        Command c = Commands.commands.get(cmd);
+                        ParsedCommand pc = ParsedCommand.parse(command);
+                        Command c = Commands.commands.get(pc.command);
 
                         if (c == null) {
                             out.println("Invalid command");
@@ -44,7 +41,7 @@ public class ClientProcess {
                         }
 
                         try {
-                            out.println(c.execute(ClientProcess.this, args));
+                            out.println(c.execute(ClientProcess.this, pc.args));
                         } catch (CommandException e) {
                             out.println(new Response(Response.ResponseType.ERROR, e.getMessage()));
                         }

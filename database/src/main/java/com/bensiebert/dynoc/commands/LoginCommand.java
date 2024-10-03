@@ -3,6 +3,7 @@ package com.bensiebert.dynoc.commands;
 import com.bensiebert.dynoc.auth.Users;
 import com.bensiebert.dynoc.crypto.Crypto;
 import com.bensiebert.dynoc.server.ClientProcess;
+import com.bensiebert.dynoc.server.Connection;
 import com.bensiebert.dynoc.server.Response;
 
 public class LoginCommand implements Command {
@@ -13,7 +14,7 @@ public class LoginCommand implements Command {
     }
 
     @Override
-    public Response execute(ClientProcess proc, String[] args) throws CommandException {
+    public Response execute(Connection proc, String[] args) throws CommandException {
         if (args.length != 2) {
             throw new CommandException("Invalid number of arguments. Usage: login <username> <password>");
         }
